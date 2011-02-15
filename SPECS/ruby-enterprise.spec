@@ -46,6 +46,13 @@ libraries.
 %build 
 # work around bug in "installer"
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/ruby/gems/1.8/gems
+
+#
+# Add compile flags for better Xen performance
+#
+export CFLAGS="-mno-tls-direct-seg-refs"
+export CXXFLAGS="-mno-tls-direct-seg-refs" 
+
 # run installer
 ./installer --auto %{_prefix} --dont-install-useful-gems --no-dev-docs --destdir $RPM_BUILD_ROOT
 
