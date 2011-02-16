@@ -1,6 +1,6 @@
 # Package Maintainer: Increment phusion_release to match latest release available
 %define phusion_release	2010.02
-%define	_prefix	/usr/local
+%define	_prefix	/usr
 %define _bindir %{_prefix}/bin
 
 Summary: Ruby Enterprise Edition (Release %{phusion_release})
@@ -50,8 +50,10 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/ruby/gems/1.8/gems
 #
 # Add compile flags for better Xen performance
 #
-export CFLAGS="-mno-tls-direct-seg-refs"
-export CXXFLAGS="-mno-tls-direct-seg-refs" 
+if [ "%{_arch}" = "i386" ]; then
+    export CFLAGS="-mno-tls-direct-seg-refs"
+    export CXXFLAGS="-mno-tls-direct-seg-refs" 
+fi
 
 # run installer
 ./installer --auto %{_prefix} --dont-install-useful-gems --no-dev-docs --destdir $RPM_BUILD_ROOT
@@ -66,7 +68,7 @@ export LD_LIBRARY_PATH="${RPM_BUILD_ROOT}%{_prefix}/lib/"
 export RUBYLIB="${RPM_BUILD_ROOT}%{_prefix}/lib/ruby/1.8"
 export RUBYLIB="${RUBYLIB}:${RPM_BUILD_ROOT}%{_prefix}/lib/ruby/1.8/%{_arch}-linux"
 # Run Ruby's unit tests:
-${RPM_BUILD_ROOT}%{_bindir}/ruby ./source/test/runner.rb | tee ./source/RPM_build_unit_tests || :
+# ${RPM_BUILD_ROOT}%{_bindir}/ruby ./source/test/runner.rb | tee ./source/RPM_build_unit_tests || :
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -84,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc source/README
 %doc source/README.EXT
 %doc source/ToDo
-%doc source/RPM_build_unit_tests
+# %doc source/RPM_build_unit_tests
 
 # rubygems
 %exclude %{_prefix}/bin/gem
@@ -122,7 +124,8 @@ fi
 
 %changelog 
 * Mon Feb 14 2011 Christopher Deutsch <christopher@rightscale.com>
-- Moved to /usr/local
+- Moved to /usr
+- Added Xen specific build flags on i386
 
 * Tue Aug 24 2010 Adam Vollrath <hosting@endpoint.com>
 - Updated package metadata
