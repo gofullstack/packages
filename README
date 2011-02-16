@@ -1,1 +1,9 @@
 Based on https://gist.github.com/819018
+
+Notes:
+
+* Compiled using Xen specific gcc flags that may reduce performance
+  on non-virtualized x86 systems. 64bit systems are unaffected.
+
+* This ruby-enterprise package installs into /usr by default, so it 
+  cannot be used alongside a distro's standard Ruby installation.
