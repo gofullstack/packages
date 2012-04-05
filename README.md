@@ -2,9 +2,9 @@
 
 These are packages (mostly rpm and deb) used by Cramer Development. We mainly use CentOS/RHEL 5 and Ubuntu LTS, so YMMV on other distros and versions. Most of these were built with [FPM](https://github.com/jordansissel/fpm).
 
-## gearmand
+## gearmand deb
 
-[Gearman](http://gearman.org) server.
+[Gearman](http://gearman.org) server. Only installs the binaries, does not include any initscripts, log rotation, or anything else.
 
 Notes from installation:
 
