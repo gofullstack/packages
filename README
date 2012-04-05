@@ -1,6 +1,0 @@
-RPMS for Redhat and CentOS systems. Used by Cramer Development.
-
-Compiled from these sources:
-
-* https://github.com/jgoldschrafe/rpm-ruby-enterprise
-* https://github.com/imeyer/ruby-1.9.2-rpm
