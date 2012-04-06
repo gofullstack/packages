@@ -17,7 +17,7 @@ Notes from installation:
     mkdir /tmp/ginstall
     make install DESTDIR=/tmp/ginstall
     fpm -s dir -t rpm -n gearmand -v 0.24 -C /tmp/ginstall -p
-    gearmand-VERSION_ARCH.rpm usr/local/bin usr/local/lib
+    gearmand-VERSION_ARCH.rpm usr
 
 ## gearmand deb
 
