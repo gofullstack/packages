@@ -2,6 +2,23 @@
 
 These are packages (mostly rpm and deb) used by Cramer Development. We mainly use CentOS/RHEL 5 and Ubuntu LTS, so YMMV on other distros and versions. Most of these were built with [FPM](https://github.com/jordansissel/fpm).
 
+## gearmand rpm
+[Gearman](http://gearman.org) server. Only installs the binaries, nothing else.
+
+Notes from installation:
+
+    # https://launchpad.net/gearmand/trunk/0.24/+download/gearmand-0.24.tar.gz
+    sudo yum install boost141 boost141-devel libevent libevent-devel
+    ./configure
+    # if configure fails because it can't find something related to Boost, do this:
+    # export LDFLAGS="-L/usr/lib64/boost141"
+    # then run ./configure again
+    make
+    mkdir /tmp/ginstall
+    make install DESTDIR=/tmp/ginstall
+    fpm -s dir -t rpm -n gearmand -v 0.24 -C /tmp/ginstall -p
+    gearmand-VERSION_ARCH.rpm usr/local/bin usr/local/lib
+
 ## gearmand deb
 
 [Gearman](http://gearman.org) server. Only installs the binaries, does not include any initscripts, log rotation, or anything else.
